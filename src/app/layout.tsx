@@ -1,10 +1,8 @@
 // lib
 import type { Metadata } from "next";
-import { Public_Sans } from "next/font/google";
 // local
 import "./globals.css";
-
-const publicSans = Public_Sans({ subsets: ["latin"] });
+import { inter } from "@/fonts";
 
 export const metadata: Metadata = {
   title: "Dynamic Portfolio",
@@ -18,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={publicSans.className}>{children}</body>
+      <body className={`bg-[#FAFAFA] ${inter.className}`}>{children}</body>
     </html>
   );
 }
