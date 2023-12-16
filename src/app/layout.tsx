@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 // local
 import "./globals.css";
-import { inter } from "@/fonts";
+import { inter } from "@/libs/fonts";
+import { Footer, Navbar } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Dynamic Portfolio",
@@ -16,7 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-[#FAFAFA] ${inter.className}`}>{children}</body>
+      <body className={`bg-[#FAFAFA] ${inter.className}`}>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

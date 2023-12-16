@@ -1,7 +1,11 @@
+"use client";
+
 // lib
 import { FC } from "react";
 // local
-import { inter, poppins } from "@/fonts";
+import { inter, poppins } from "@/libs/fonts";
+import { cn } from "@/libs/utils";
+import { usePathname } from "next/navigation";
 
 const ImageSection: FC = () => {
   return (
@@ -40,9 +44,18 @@ const Portfolio: FC = () => {
   );
 };
 
-const HomePage: FC = () => {
+interface HomePageProps {
+  isPreview: boolean;
+}
+const HomePage: FC<HomePageProps> = ({ isPreview }) => {
+  const pathName = usePathname();
   return (
-    <main className="shadow-portfolio-primary rounded-xl min-h-screen w-[655px] bg-white mx-auto my-3 pb-[38px]">
+    <main
+      className={cn([
+        "shadow-portfolio-primary rounded-xl min-h-screen bg-white mx-auto pb-[38px]",
+        pathName === "/" && "w-[655px]",
+      ])}
+    >
       <ImageSection />
       <ProfileSection />
       <div className="px-[60px] mt-5">

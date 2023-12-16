@@ -55,6 +55,9 @@ const config: Config = {
         primary: {
           DEFAULT: "rgb(var(--color-primary-default) / <alpha-value>)",
         },
+        secondary: {
+          DEFAULT: "rgb(var(--color-secondary-default) / <alpha-value>)",
+        },
         gray: {
           100: "rgb(var(--color-gray-100) / <alpha-value>)",
           200: "rgb(var(--color-gray-200) / <alpha-value>)",
@@ -73,15 +76,18 @@ const config: Config = {
         // Default Colors
         ":root": {
           // PRIMARY
-          "--color-primary-default": "5 132 249",
+          "--color-primary-default": "5 132 249", // #0584F9
           // END PRIMARY
+          // SECONDARY
+          "--color-secondary-default": "16 164 176", // #10A4B0
+          // END SECONDARY
 
           // GRAY COLOR
-          "--color-gray-100": "145 158 171", // #6B6B6B
-          "--color-gray-200": "159 159 159", // #919EAB
-          "--color-gray-300": "135 135 135", // #9F9F9F
-          "--color-gray-400": "113 121 132", // #878787
-          "--color-gray-500": "107 107 107", // #717984
+          "--color-gray-100": "145 158 171", // #919EAB
+          "--color-gray-200": "159 159 159", // #9F9F9F
+          "--color-gray-300": "135 135 135", // #878787
+          "--color-gray-400": "113 121 132", // #717984
+          "--color-gray-500": "107 107 107", // #6B6B6B
           "--color-gray-600": "21 27 38", // #151B26
           "--color-gray-700": "0 0 0", // #000000
           // END GRAY COLOR
