@@ -11,9 +11,7 @@ interface CardProps {
   childrenClassName?: string;
   //
   isPortfolio?: boolean;
-  isLastIndex?: boolean;
   handleClose?: (event: MouseEvent<HTMLDivElement>) => void;
-  handleAdd?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 const Card: FC<CardProps> = ({
@@ -22,9 +20,7 @@ const Card: FC<CardProps> = ({
   className,
   childrenClassName,
   isPortfolio = false,
-  isLastIndex = false,
   handleClose,
-  handleAdd,
 }) => {
   return (
     <div
@@ -42,14 +38,6 @@ const Card: FC<CardProps> = ({
               color="#6C7074"
               className="cursor-pointer"
               onClick={handleClose}
-            />
-          )}
-          {isLastIndex && (
-            <Icon
-              name="plus"
-              color="#6C7074"
-              className="cursor-pointer"
-              onClick={handleAdd}
             />
           )}
         </div>

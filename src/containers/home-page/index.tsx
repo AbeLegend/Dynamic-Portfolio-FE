@@ -7,13 +7,17 @@ import { inter, poppins } from "@/libs/fonts";
 import { cn } from "@/libs/utils";
 import { usePathname } from "next/navigation";
 
-const ImageSection: FC = () => {
+interface HomePageProps {
+  isPreview: boolean;
+}
+const ImageSection: FC<HomePageProps> = ({ isPreview }) => {
   return (
     <section
       className={cn([
         "h-40",
         "tablet:h-60",
         "rounded-t-xl w-full bg-gray-400 relative",
+        isPreview && "tablet:h-44 laptop:h-60",
       ])}
     >
       <div
@@ -21,13 +25,14 @@ const ImageSection: FC = () => {
           "w-32",
           "tablet:w-40",
           "absolute -bottom-10 left-0 right-0 mx-auto aspect-square rounded-full bg-gray-100",
+          isPreview && "tablet:w-32 laptop:w-40",
         ])}
       ></div>
     </section>
   );
 };
 
-const ProfileSection: FC = () => {
+const ProfileSection: FC<HomePageProps> = ({ isPreview }) => {
   return (
     <section className="mt-[58px] text-center">
       <h2
@@ -74,9 +79,6 @@ const Portfolio: FC = () => {
   );
 };
 
-interface HomePageProps {
-  isPreview: boolean;
-}
 const HomePage: FC<HomePageProps> = ({ isPreview }) => {
   const pathName = usePathname();
   return (
@@ -87,9 +89,16 @@ const HomePage: FC<HomePageProps> = ({ isPreview }) => {
         "shadow-portfolio-primary rounded-xl min-h-screen bg-white mx-auto pb-[38px]",
       ])}
     >
-      <ImageSection />
-      <ProfileSection />
-      <div className={cn(["px-1", "tablet:px-[60px] ", "mt-5"])}>
+      <ImageSection isPreview={isPreview} />
+      <ProfileSection isPreview={isPreview} />
+      <div
+        className={cn([
+          "px-1",
+          "tablet:px-[60px] ",
+          "mt-5",
+          isPreview && "tablet:px-2 laptop:px-[40px]",
+        ])}
+      >
         <h3
           className={cn([
             "tablet:text-heading-2 tablet:font-bold tablet:mb-[14px]",
