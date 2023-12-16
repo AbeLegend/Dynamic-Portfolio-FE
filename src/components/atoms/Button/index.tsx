@@ -32,7 +32,10 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       {...buttonProps}
       className={cn([
-        "py-[11px] px-[22px] rounded-lg font-bold bg-transparent border",
+        "py-2 px-2",
+        "tablet:py-2 tablet:px-3",
+        "laptop:py-[11px] laptop:px-[22px]",
+        "rounded-lg font-bold bg-transparent border",
         buttonType === "fill" && "border-secondary bg-secondary text-white",
         buttonType === "outline" && "border-secondary text-secondary",
         disabled &&

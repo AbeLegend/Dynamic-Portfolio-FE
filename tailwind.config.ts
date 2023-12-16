@@ -68,6 +68,12 @@ const config: Config = {
           700: "rgb(var(--color-gray-700) / <alpha-value>)",
         },
       },
+      screens: {
+        "mobile": "360px",
+        "tablet": "640px",
+        "laptop": "1024px",
+        "desktop": "1280px",
+      }
     },
   },
   plugins: [
