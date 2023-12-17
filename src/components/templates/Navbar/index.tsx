@@ -114,14 +114,14 @@ const Navbar: FC = () => {
                   ? "Edit Portfolio"
                   : "My Portfolio"}
               </h2>
-              <div className="w-16 h-16 rounded-full bg-gray-400 relative mx-auto mt-6" />
+              <div className="w-16 h-16 rounded-full bg-white relative mx-auto mt-6" />
               <h3 className="text-center">{name}</h3>
             </div>
           )}
         </>
       ) : (
         <div className="flex gap-x-2 items-center">
-          <div className="w-8 h-8 rounded-full bg-gray-400 relative">
+          <div className="w-8 h-8 rounded-full bg-white relative">
             {image && (
               <Image
                 alt="profile"
