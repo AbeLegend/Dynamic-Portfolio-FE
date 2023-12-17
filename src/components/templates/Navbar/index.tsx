@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMediaQuery } from "react-responsive";
+import { motion, AnimatePresence } from "framer-motion";
 
 // local
 import { Button } from "@/components/atoms";
@@ -21,6 +22,7 @@ const Navbar: FC = () => {
   // useState
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   // useContext
   const { image, name, isEdited, setIsEdited } = usePortfolioContext();
 
@@ -99,34 +101,41 @@ const Navbar: FC = () => {
             iconSize={20}
             onClick={() => setIsOpen(true)}
           />
-          {isOpen && (
-            <div className="absolute h-full w-5/6 top-0 right-0 bg-white z-30">
-              <div className="w-full flex justify-end items-center pr-1 h-[75px]">
-                <Button
-                  icon="x"
-                  iconSize={20}
-                  iconColor="#10A4B0"
-                  onClick={() => setIsOpen(false)}
-                />
-              </div>
-              <h2 className="text-primary text-center font-bold">
-                {pathname === "/edit-portfolio"
-                  ? "Edit Portfolio"
-                  : "My Portfolio"}
-              </h2>
-              <div className="w-16 h-16 rounded-full bg-white relative mx-auto mt-6">
-                {image && (
-                  <Image
-                    alt="profile"
-                    src={image}
-                    layout="fill"
-                    className="rounded-full"
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                className="absolute h-full w-5/6 top-0 right-0 bg-white z-30"
+                initial={{ x: 700 }}
+                animate={{ x: 0, transition: { type: "just" } }}
+                exit={{ x: 700, transition: { type: "just" } }}
+              >
+                <div className="w-full flex justify-end items-center pr-1 h-[75px]">
+                  <Button
+                    icon="x"
+                    iconSize={20}
+                    iconColor="#10A4B0"
+                    onClick={() => setIsOpen(false)}
                   />
-                )}
-              </div>
-              <h3 className="text-center">{name}</h3>
-            </div>
-          )}
+                </div>
+                <h2 className="text-primary text-center font-bold">
+                  {pathname === "/edit-portfolio"
+                    ? "Edit Portfolio"
+                    : "My Portfolio"}
+                </h2>
+                <div className="w-16 h-16 rounded-full bg-white relative mx-auto mt-6">
+                  {image && (
+                    <Image
+                      alt="profile"
+                      src={image}
+                      layout="fill"
+                      className="rounded-full"
+                    />
+                  )}
+                </div>
+                <h3 className="text-center">{name}</h3>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       ) : (
         <div className="flex gap-x-2 items-center">
