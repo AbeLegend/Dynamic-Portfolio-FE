@@ -34,3 +34,4 @@ Agar bisa melihat lebih jelas saya membuat schema nya pada project sanity. Anda 
 4. Menambahkan animasi loading ketika button simpan di klik, agar webiste lebih interaktif
 5. Menambahkan animasi skeleton loading pada image dan imageCover jika server masih loading
 6. Menambahkan animasi minimize dan maximize untuk form edit portfolio
+7. Menambahkan sidebar jika dibuka di device mobile, agar navbar tidak terlihat sempit
