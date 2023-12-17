@@ -8,13 +8,21 @@ import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/atoms";
 import { cn } from "@/libs/utils";
 import { maxMobile, minMobile } from "@/libs/constant";
+import { usePortfolioContext } from "@/context";
+import Image from "next/image";
 
 const Navbar: FC = () => {
+  // usePathname
   const pathname = usePathname();
+  // useRouter
   const router = useRouter();
+  // useMediaQuery
   const mobile = useMediaQuery({ minWidth: minMobile, maxWidth: maxMobile });
+  // useState
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  // useContext
+  const { image, name, isEdited, setIsEdited } = usePortfolioContext();
 
   useEffect(() => {
     setIsMobile(mobile);
@@ -39,7 +47,20 @@ const Navbar: FC = () => {
             iconSize={20}
             iconColor="#10A4B0"
             className="p-1"
-            onClick={() => router.back()}
+            onClick={() => {
+              if (isEdited) {
+                if (
+                  confirm(
+                    "Anda memiliki perubahan pada form, jika kembali maka form yang di edit akan terhapus. Yakin?"
+                  )
+                ) {
+                  router.back();
+                  setIsEdited(false);
+                }
+              } else {
+                router.back();
+              }
+            }}
             buttonType="outline"
           />
         ) : (
@@ -94,14 +115,23 @@ const Navbar: FC = () => {
                   : "My Portfolio"}
               </h2>
               <div className="w-16 h-16 rounded-full bg-gray-400 relative mx-auto mt-6" />
-              <h3 className="text-center">Anonymous</h3>
+              <h3 className="text-center">{name}</h3>
             </div>
           )}
         </>
       ) : (
         <div className="flex gap-x-2 items-center">
-          <div className="w-8 h-8 rounded-full bg-gray-400 relative"></div>
-          <h3>Anonymous</h3>
+          <div className="w-8 h-8 rounded-full bg-gray-400 relative">
+            {image && (
+              <Image
+                alt="profile"
+                src={image}
+                layout="fill"
+                className="rounded-full"
+              />
+            )}
+          </div>
+          <h3>{name}</h3>
         </div>
       )}
       {/* END: Profile */}

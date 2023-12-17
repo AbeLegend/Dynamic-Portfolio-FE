@@ -36,10 +36,10 @@ const Button: React.FC<ButtonProps> = ({
         "tablet:py-2 tablet:px-3",
         "laptop:py-[11px] laptop:px-[22px]",
         "rounded-lg font-bold bg-transparent border",
-        buttonType === "fill" && "border-secondary bg-secondary text-white",
+        buttonType === "fill" && "border-secondary bg-secondary text-secondary",
         buttonType === "outline" && "border-secondary text-secondary",
         disabled &&
-          "disabled:bg-[#919EAB40] border-none text-gray-200 text-opacity-80",
+          "disabled:bg-[#919EAB40] disabled:border-none disabled:text-gray-200 disabled:text-opacity-80",
         publicSans.className,
         className,
       ])}

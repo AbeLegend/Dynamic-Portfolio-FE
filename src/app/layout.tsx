@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 // local
 import "./globals.css";
 import { inter } from "@/libs/fonts";
-import { Footer, Navbar } from "@/components/templates";
+import PortfolioContextProvider from "@/context";
 
 export const metadata: Metadata = {
   title: "Dynamic Portfolio",
@@ -16,12 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`bg-[#FAFAFA] ${inter.className}`}>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <PortfolioContextProvider>
+      <html lang="en">
+        <body className={`bg-[#FAFAFA] ${inter.className}`}>{children}</body>
+      </html>
+    </PortfolioContextProvider>
   );
 }

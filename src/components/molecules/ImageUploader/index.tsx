@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { poppins } from "@/libs/fonts";
 
 interface ImageUploaderProps {
-  onImageUpload: (base64: string) => void;
+  onImageUpload: (base64: string, fileName: string) => void;
 }
 
 const AttachmentIcon: FC<{ className?: string }> = ({ className }) => {
@@ -28,6 +28,7 @@ const AttachmentIcon: FC<{ className?: string }> = ({ className }) => {
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -38,9 +39,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
         reader.onload = () => {
           const base64String = reader.result as string;
           setImagePreview(base64String);
-          onImageUpload(base64String);
+          setFileName(file.name);
+          onImageUpload(base64String, file.name);
         };
-
         reader.readAsDataURL(file);
       }
     },
@@ -49,26 +50,27 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    // accept: "image/jpeg, image/png" ,
+    // @ts-ignore
+    accept: "image/jpeg, image/jpg, image/png",
     multiple: false,
+    maxSize: 500000000, // 500mb
   });
 
   return (
-    <div className="">
-      <div
-        {...getRootProps()}
-        className="rounded-lg py-[71px] cursor-pointer bg-[#EBEBEB] w-full text-center underline"
-      >
-        <input {...getInputProps()} />
-        <AttachmentIcon className="mx-auto mb-2" />
-        <h4 className={`${poppins.className} text-gray-100 `}>
-          Drag and drop files, or <span className="text-primary">Browse</span>
-        </h4>
-        <p className="text-body text-gray-300">
-          Support formats : png, jpg, jpeg, mp4.
-        </p>
-        <p className="text-body text-gray-300">Max size : 500Mb</p>
-      </div>
+    <div
+      {...getRootProps()}
+      className="rounded-lg py-[71px] cursor-pointer bg-[#EBEBEB] w-full text-center underline relative"
+    >
+      <input {...getInputProps()} />
+      <AttachmentIcon className="mx-auto mb-2" />
+      <h4 className={`${poppins.className} text-gray-100 `}>
+        Drag and drop files, or <span className="text-primary">Browse</span>
+      </h4>
+      <p className="text-body text-gray-300">
+        Support formats : png, jpg, jpeg
+      </p>
+      <p className="text-body text-gray-300">Max size : 500Mb</p>
+      {fileName && <p className="text-base text-black">Uploaded: {fileName}</p>}
     </div>
   );
 };
