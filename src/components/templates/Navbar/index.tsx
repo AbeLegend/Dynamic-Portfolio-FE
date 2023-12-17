@@ -114,7 +114,16 @@ const Navbar: FC = () => {
                   ? "Edit Portfolio"
                   : "My Portfolio"}
               </h2>
-              <div className="w-16 h-16 rounded-full bg-white relative mx-auto mt-6" />
+              <div className="w-16 h-16 rounded-full bg-white relative mx-auto mt-6">
+                {image && (
+                  <Image
+                    alt="profile"
+                    src={image}
+                    layout="fill"
+                    className="rounded-full"
+                  />
+                )}
+              </div>
               <h3 className="text-center">{name}</h3>
             </div>
           )}
