@@ -1,5 +1,6 @@
 // lib
-import { FC, MouseEvent, ReactNode } from "react";
+import { FC, MouseEvent, ReactNode, useState } from "react";
+import { motion, useAnimationControls } from "framer-motion";
 // local
 import { Icon } from "@/components/atoms";
 import { publicSans } from "@/libs/fonts";
@@ -22,6 +23,10 @@ const Card: FC<CardProps> = ({
   isPortfolio = false,
   handleClose,
 }) => {
+  // useAnimationControls
+  const control = useAnimationControls();
+  // useState
+  const [isMinimize, setIsMinimize] = useState<boolean>(false);
   return (
     <div
       className={`px-6 py-9 rounded-xl shadow-portfolio-primary bg-white ${className}`}
@@ -31,7 +36,46 @@ const Card: FC<CardProps> = ({
           {title}
         </h2>
         <div className="flex gap-x-6">
-          <Icon name="minimize-2" color="#6C7074" className="cursor-pointer" />
+          {isMinimize ? (
+            <Icon
+              name="maximize-2"
+              color="#6C7074"
+              className="cursor-pointer"
+              onClick={() => {
+                setIsMinimize(false);
+                control.start({
+                  scale: 1,
+                  display: "block",
+                  transition: {
+                    duration: 0.2,
+                  },
+                });
+              }}
+            />
+          ) : (
+            <Icon
+              name="minimize-2"
+              color="#6C7074"
+              className="cursor-pointer"
+              onClick={() => {
+                setIsMinimize(true);
+                control.start({
+                  scale: 0,
+                  transition: {
+                    duration: 0.2,
+                  },
+                });
+                control.start({
+                  display: "none",
+                  transition: {
+                    delay: 0.2,
+                    duration: 0.2,
+                  },
+                });
+              }}
+            />
+          )}
+
           {isPortfolio && (
             <Icon
               name="x-circle"
@@ -42,7 +86,9 @@ const Card: FC<CardProps> = ({
           )}
         </div>
       </div>
-      <div className={childrenClassName}>{children}</div>
+      <motion.div className={childrenClassName} animate={control}>
+        {children}
+      </motion.div>
     </div>
   );
 };
