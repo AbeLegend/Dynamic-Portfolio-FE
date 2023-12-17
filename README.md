@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dynamic Portfolio Front End
 
-## Getting Started
+Untuk menjalankan website ini dapat akses halaman [Dynamic Portfolio FE](https://dynamic-portfolio-fe-mfikriab.vercel.app/)
 
-First, run the development server:
+Tech Stack yang digunakan sebagai berikut:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- NextJS (Typescript)
+- Sanity (Typescript)
+
+Untuk schema nya sebagai berikut:
+
+_[key]: type_
+
+```
+imageCover  : image
+image       : image
+name        : string
+description : text
+portfolio   : Array of Object
+            position    : string
+            company     : string
+            startDate   : date
+            endDate     : date
+            description : text
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Agar bisa melihat lebih jelas saya membuat schema nya pada project sanity. Anda dapat akses github tersebut [Dynamic-Portfolio-BE](https://github.com/AbeLegend/Dynamic-Portfolio-BE)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Penambahan Design
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Menambahkan Navbar agar mudah melakukan navigasi
+2. Terdapat informasi nama halaman, nama, dan foto pada navbar agar navbar tidak terlalu kosong
+3. Terdapat Footer untuk copyright
+4. Menambahkan animasi loading ketika button simpan di klik, agar webiste lebih interaktif
+5. Menambahkan animasi skeleton loading pada image dan imageCover jika server masih loading
+6. Menambahkan animasi minimize dan maximize untuk form edit portfolio
