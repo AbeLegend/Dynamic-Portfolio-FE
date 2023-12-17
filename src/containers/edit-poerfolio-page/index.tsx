@@ -4,7 +4,7 @@
 import { FC, useEffect, useState } from "react";
 import { client, imageUrl } from "@/services/sanity";
 import { base64StringToBlob } from "blob-util";
-import { useFormik } from "formik";
+import { FormikErrors, useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +15,7 @@ import { Card, ImageUploader } from "@/components/molecules";
 import { HomePage } from "@/containers/";
 import { cn } from "@/libs/utils";
 import {
+  ListPortfolioType,
   PortfolioInitialValue,
   PortfolioType,
   initialListPortfolio,
@@ -216,6 +217,11 @@ const EditPortfolioPage: FC = () => {
             </Card>
             {form.values.portfolio.length > 0 &&
               form.values.portfolio.map((item, index) => {
+                const portfolioPrefix = `portfolio.${index}`;
+
+                const portfolioErrors = form.errors
+                  .portfolio as FormikErrors<ListPortfolioType>[];
+
                 return (
                   <Card
                     title={`Portfolio ${index + 1}`}
@@ -238,6 +244,14 @@ const EditPortfolioPage: FC = () => {
                       value={item.position}
                       onChange={form.handleChange}
                     />
+                    {portfolioErrors &&
+                      portfolioErrors[index] &&
+                      portfolioErrors[index].position && (
+                        <ErrorText
+                          value={portfolioErrors[index].position}
+                          className={cn(["col-span-12", "laptop:col-span-8"])}
+                        />
+                      )}
                     <Input
                       type="text"
                       placeholder="Perusahaan"
@@ -247,6 +261,14 @@ const EditPortfolioPage: FC = () => {
                       value={item.company}
                       onChange={form.handleChange}
                     />
+                    {portfolioErrors &&
+                      portfolioErrors[index] &&
+                      portfolioErrors[index].company && (
+                        <ErrorText
+                          value={portfolioErrors[index].company}
+                          className={cn(["col-span-12", "laptop:col-span-8"])}
+                        />
+                      )}
                     <div
                       className={cn([
                         "col-span-12",
@@ -267,12 +289,17 @@ const EditPortfolioPage: FC = () => {
                           }
                         }}
                         className={cn([
-                          "py-4 px-3 border border-gray-100/30 rounded-lg focus:outline-none placeholder:underline placeholder:text-gray-100 w-full",
+                          "py-4 px-3 border border-gray-100/30 rounded-lg focus:outline-none placeholder:underline placeholder:text-gray-100 w-full mb-6",
                         ])}
                         wrapperClassName="rounded-lg w-full"
                         placeholderText="Tanggal Mulai"
                         dateFormat="d-M-y"
                       />
+                      {portfolioErrors &&
+                        portfolioErrors[index] &&
+                        portfolioErrors[index].startDate && (
+                          <ErrorText value={portfolioErrors[index].startDate} />
+                        )}
                     </div>
                     <div className={cn(["col-span-12", "laptop:col-span-4"])}>
                       <DatePicker
@@ -289,12 +316,17 @@ const EditPortfolioPage: FC = () => {
                           }
                         }}
                         className={cn([
-                          "py-4 px-3 border border-gray-100/30 rounded-lg focus:outline-none placeholder:underline placeholder:text-gray-100 w-full",
+                          "py-4 px-3 border border-gray-100/30 rounded-lg focus:outline-none placeholder:underline placeholder:text-gray-100 w-full mb-6",
                         ])}
                         wrapperClassName="rounded-lg w-full"
                         placeholderText="Tanggal Selesai"
                         dateFormat="d-M-y"
                       />
+                      {portfolioErrors &&
+                        portfolioErrors[index] &&
+                        portfolioErrors[index].endDate && (
+                          <ErrorText value={portfolioErrors[index].endDate} />
+                        )}
                     </div>
 
                     <Textarea
@@ -305,6 +337,14 @@ const EditPortfolioPage: FC = () => {
                       value={item.description}
                       onChange={form.handleChange}
                     />
+                    {portfolioErrors &&
+                      portfolioErrors[index] &&
+                      portfolioErrors[index].endDate && (
+                        <ErrorText
+                          value={portfolioErrors[index].endDate}
+                          className={cn(["col-span-12", "laptop:col-span-8"])}
+                        />
+                      )}
                   </Card>
                 );
               })}
