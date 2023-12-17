@@ -86,8 +86,8 @@ const Card: FC<CardProps> = ({
           )}
         </div>
       </div>
-      <motion.div className={childrenClassName} animate={control}>
-        {children}
+      <motion.div animate={control}>
+        <div className={childrenClassName}>{children}</div>
       </motion.div>
     </div>
   );
